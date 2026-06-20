@@ -1,5 +1,4 @@
-<!-- Плеер будет создан с задержкой, после того как загрузятся все ресурсы на странице. Для этого используется событие `DOMContentLoaded`. Благодаря этой особенности можно вызывать функцию `createPlayer` раньше, чем загрузятся все необходимые библиотеки: jQuery и Playable.
- -->
+<img width="817" height="612" alt="21" src="https://github.com/user-attachments/assets/d9abd896-d425-4545-8f8f-ac5bc9594b43" />
 
 # Библиотека для создания видеоплеера
 
@@ -8,13 +7,6 @@
 ![max example](screenshots/max.gif)
 
 Построен на базе библиотеки [Playable](https://wix.github.io/playable/).
-
-## Примеры
-
-Два рабочих примера:
-
-- Страница с минимальными настройками — [example_min.html](./example_min.html)
-- Страница с максимальными настройками — [example_max.html](./example_max.html)
 
 ## Как подключить
 
