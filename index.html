@@ -27,39 +27,34 @@
       display: flex;
       flex-grow: 1;
       gap: 1px;
+      align-items: center;
       background-color:black;
-    }
-    .player-container .left-buttons {
-
-    }
-    .player-container .viewing-panel {
-      flex-grow: 1;
-    }
-    .player-container .right-buttons {
-
     }
     .player-container .control-button {
       border-style:none;
       cursor:pointer;
       background-color:transparent;
     }
-    .player-container .viewing-panel {
-      display: flex;
-      color:white;
-    }
-    .player-container .viewing-time {
-
-    }
-    .player-container .viewing-progressbar {
-      flex-grow: 1;
-    }
-    .player-container .video-duration {
-
-    }
     .player-container .control-button .fa {
       color:white;
-      font-size: 150%;
-      width: 25px;
+      font-size: 18px;
+      width: 22px;
+    }
+    .player-container .viewing-panel {
+      display: flex;
+      flex-grow: 1;
+      align-items: center;
+      color:white;
+    }
+    .player-container .viewing-progressbar {
+      margin: 7px 12px;
+      flex-grow: 1;
+    }
+    .player-container .progressbar{
+      display: flex;
+      height: 6px;
+      background-color: red;
+      border-radius: 3px;
     }
 
     .player-container .roboto-font {
@@ -70,6 +65,22 @@
       font-style: normal;
       font-variation-settings:
         "wdth" 100;
+    }
+    .circle-slider{
+      display: inline-block;
+      height: 8px;
+      width: 8px;
+      margin-left: -7px;
+      background-color: red;
+      border-radius: 50%;
+      border-style: solid;
+      border-width: 3px;
+      border-color: white;
+      box-shadow: 0 0 5px rgba(0,0,0,0.5);
+    }
+    .js-progress{
+      display: flex;
+      align-items: center;
     }
   </style>
 </head>
@@ -99,7 +110,12 @@
         <div class="viewing-time roboto-font">
           <span class="js-current-time"></span>
         </div>
-        <div class="viewing-progressbar"></div>
+        <div class="viewing-progressbar">
+          <div class="js-progress">
+            <div class="progressbar js-progress-slider"></div>
+            <div class="circle-slider"></div> 
+          </div>
+        </div>
         <div class="video-duration roboto-font">
           <span class="js-duration"></span>
         </div>
