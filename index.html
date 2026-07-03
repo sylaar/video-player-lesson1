@@ -1,154 +1,152 @@
 <!DOCTYPE html>
-<html>
-<head>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
-  <link rel="icon" type="image/png" href="/static/favicon/favicon-96x96.png" sizes="96x96" />
-  <link rel="icon" type="image/svg+xml" href="/static/favicon/favicon.svg" />
-  <link rel="shortcut icon" href="/static/favicon/favicon.ico" />
-  <link rel="apple-touch-icon" sizes="180x180" href="/static/favicon/apple-touch-icon.png" />
-  <link rel="manifest" href="/static/favicon/site.webmanifest" />
-  <title>Видео плеер</title>
-  <link rel="stylesheet" href="/static/css/normalize.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-  <meta charset="utf-8">
-  <style type="text/css">
-    .player-container {
-      display: flex;
-      flex-direction: column;
-      width: 800px;
-      height: 600px;
-      box-shadow: 0 0 10px rgba(0,0,0,2);
-    }
-    .player-container .screen {
-      flex-grow: 86;
-    }
-    .player-container .bottom-control-panel {
-      display: flex;
-      flex-grow: 1;
-      gap: 1px;
-      align-items: center;
-      background-color:black;
-    }
-    .player-container .control-button {
-      border-style:none;
-      cursor:pointer;
-      background-color:transparent;
-    }
-    .player-container .control-button .fa {
-      color:white;
-      font-size: 18px;
-      width: 22px;
-    }
-    .player-container .viewing-panel {
-      display: flex;
-      flex-grow: 1;
-      align-items: center;
-      color:white;
-    }
-    .player-container .viewing-progressbar {
-      margin: 7px 12px;
-      flex-grow: 1;
-    }
-    .player-container .progressbar{
-      display: flex;
-      height: 6px;
-      background-color: red;
-      border-radius: 3px;
-    }
+<html lang="ru">
+  <head>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/png" href="/static/favicon/favicon-96x96.png" sizes="96x96">
+    <link rel="icon" type="image/svg+xml" href="/static/favicon/favicon.svg">
+    <link rel="shortcut icon" href="/static/favicon/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="/static/favicon/apple-touch-icon.png">
+    <link rel="manifest" href="/static/favicon/site.webmanifest">
+    <title>Видео плеер</title>
+    <link rel="stylesheet" href="/static/css/normalize.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <meta charset="utf-8">
+    <style type="text/css">
+      .player {
+        display: flex;
+        flex-direction: column;
+        width: 800px;
+        height: 600px;
+        box-shadow: 0 0 10px rgba(0,0,0,2);
+      }
+      .player .screen {
+        flex-grow: 86;
+      }
+      .player .bottom-panel {
+        display: flex;
+        flex-grow: 1;
+        gap: 1px;
+        align-items: center;
+        background-color:black;
+      }
+      .player .bottom-panel__control-button {
+        border-style:none;
+        cursor:pointer;
+        background-color:transparent;
+      }
+      .player .bottom-panel__control-button-icon {
+        color:white;
+        font-size: 18px;
+        width: 22px;
+      }
+      .player .viewing-panel {
+        display: flex;
+        flex-grow: 1;
+        align-items: center;
+        color:white;
+      }
+      .player .viewing-progressbar {
+        margin: 7px 12px;
+        flex-grow: 1;
+      }
+      .player .viewing-progressbar__progressbar {
+        display: flex;
+        height: 6px;
+        background-color: red;
+        border-radius: 3px;
+      }
+      .player .viewing-progressbar__circle-slider {
+        display: inline-block;
+        height: 8px;
+        width: 8px;
+        margin-left: -7px;
+        background-color: red;
+        border-radius: 50%;
+        border-style: solid;
+        border-width: 3px;
+        border-color: white;
+        box-shadow: 0 0 5px rgba(0,0,0,0.5);
+        opacity: 0;
+        transition-property: opacity;
+        transition-duration: 300ms;
+        transition-timing-function: ease-in;
+      }
+      .player .viewing-panel_font_roboto {
+        font-family: "Roboto", sans-serif;
+        font-optical-sizing: auto;
+        font-size: 16px;
+        font-weight: 400;
+        font-style: normal;
+        font-variation-settings:
+          "wdth" 100;
+      }
+      .player .viewing-progressbar__progress {
+        display: flex;
+        align-items: center;
+      }
+      .player .bottom-panel:hover .viewing-progressbar__circle-slider {
+        opacity: 1;
+        transition-property: opacity;
+        transition-duration: 300ms;
+        transition-timing-function: ease-out;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="player" id="player">
 
-    .player-container .roboto-font {
-      font-family: "Roboto", sans-serif;
-      font-optical-sizing: auto;
-      font-size: 16px;
-      font-weight: 400;
-      font-style: normal;
-      font-variation-settings:
-        "wdth" 100;
-    }
-    .circle-slider{
-      display: inline-block;
-      height: 8px;
-      width: 8px;
-      margin-left: -7px;
-      background-color: red;
-      border-radius: 50%;
-      border-style: solid;
-      border-width: 3px;
-      border-color: white;
-      box-shadow: 0 0 5px rgba(0,0,0,0.5);
-      opacity: 0;
-      transition-property: opacity;
-      transition-duration: 300ms;
-      transition-timing-function: ease-in;
-    }
-    .js-progress{
-      display: flex;
-      align-items: center;
-    }
-    .bottom-control-panel:hover .circle-slider{
-      opacity: 1;
-      transition-property: opacity;
-      transition-duration: 300ms;
-      transition-timing-function: ease-out;
-    }
-  </style>
-</head>
-<body>
-  <div class="player-container" id="player">
+      <div class="screen js-video-container"></div>
 
-    <div class="screen js-video-container"></div>
+      <div class="bottom-panel">
 
-    <div class="bottom-control-panel">
-
-      <div class="left-buttons">
-        <button class="control-button js-play-button">
-          <i class="fa fa-play" aria-hidden="true"></i>
-        </button>
-        <button class="control-button js-pause-button">
-          <i class="fa fa-pause" aria-hidden="true"></i>
-        </button>
-        <button class="control-button js-mute-button">
-          <i class="fa fa-volume-up" aria-hidden="true"></i>
-        </button>
-        <button class="control-button js-volume-button">
-          <i class="fa fa-volume-off" aria-hidden="true"></i>
-        </button>
-      </div>
-
-      <div class="viewing-panel">
-        <div class="viewing-time roboto-font">
-          <span class="js-current-time"></span>
+        <div class="left-buttons">
+          <button class="bottom-panel__control-button js-play-button">
+            <i class="bottom-panel__control-button-icon fa fa-play" aria-hidden="true"></i>
+          </button>
+          <button class="bottom-panel__control-button js-pause-button">
+            <i class="bottom-panel__control-button-icon fa fa-pause" aria-hidden="true"></i>
+          </button>
+          <button class="bottom-panel__control-button js-mute-button">
+            <i class="bottom-panel__control-button-icon fa fa-volume-up" aria-hidden="true"></i>
+          </button>
+          <button class="bottom-panel__control-button js-volume-button">
+            <i class="bottom-panel__control-button-icon fa fa-volume-off" aria-hidden="true"></i>
+          </button>
         </div>
-        <div class="viewing-progressbar">
-          <div class="js-progress">
-            <div class="progressbar js-progress-slider"></div>
-            <div class="circle-slider"></div> 
+
+        <div class="viewing-panel">
+          <div class="viewing-panel__viewing-time viewing-panel_font_roboto">
+            <span class="js-current-time"></span>
+          </div>
+          <div class="viewing-progressbar">
+            <div class="viewing-progressbar__progress js-progress">
+              <div class="viewing-progressbar__progressbar js-progress-slider"></div>
+              <div class="viewing-progressbar__circle-slider"></div> 
+            </div>
+          </div>
+          <div class="viewing-panel__video-duration viewing-panel_font_roboto">
+            <span class="js-duration"></span>
           </div>
         </div>
-        <div class="video-duration roboto-font">
-          <span class="js-duration"></span>
-        </div>
-      </div>
 
-      <div class="right-buttons">
-        <div class="fullscreen-button">
-          <button class="control-button js-fullscreen-button">
-            <i class="fa fa-expand" aria-hidden="true"></i>
+        <div class="right-buttons">
+          <button class="bottom-panel__control-button js-fullscreen-button">
+            <i class="bottom-panel__control-button-icon fa fa-expand" aria-hidden="true"></i>
           </button>
+        </div>
+        
       </div>
-      
+
     </div>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://unpkg.com/playable@2.10.3/dist/statics/playable.bundle.min.js"></script>
+    <script src="player.js"></script>
 
-  </div>
-  <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-  <script src="https://unpkg.com/playable@2.10.3/dist/statics/playable.bundle.min.js"></script>
-  <script src="player.js"></script>
+    <script type="text/javascript">
+      createPlayer({elementId: 'player'});
+    </script>
 
-  <script type="text/javascript">
-    createPlayer({elementId: 'player'});
-  </script>
-
-</body>
+  </body>
 </html>
